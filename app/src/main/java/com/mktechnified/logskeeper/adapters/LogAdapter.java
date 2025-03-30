@@ -34,8 +34,6 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.ViewHolder> {
         LogModel log = logList.get(position);
         holder.logTitle.setText(log.getLogTitle());
         holder.logDescription.setText(log.getLogDescription());
-        holder.logTimestamp.setText("Timestamp: " + log.getLogTimestamp());
-        holder.logHashTags.setText("Tags: " + log.getLogHashTags());
     }
 
     @Override
@@ -48,8 +46,8 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.ViewHolder> {
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            logTitle = itemView.findViewById(R.id.etLogTitle);
-            logDescription = itemView.findViewById(R.id.etLogDescription);
+            logTitle = itemView.findViewById(R.id.tvLogTitle);
+            logDescription = itemView.findViewById(R.id.tvLogDescription);
         }
     }
 }

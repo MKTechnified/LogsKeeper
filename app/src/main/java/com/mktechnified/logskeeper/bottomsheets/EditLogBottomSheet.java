@@ -26,7 +26,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class EditLogBottomSheet extends BottomSheetDialogFragment {
-    private EditText etLogTitle, etLogDescription, etLogType;
+    private EditText etLogTitle, etLogDescription;
     private Button btnUpdate;
     private FirebaseFirestore firestore;
     private String logTimestamp; // Firestore Document ID
@@ -37,6 +37,11 @@ public class EditLogBottomSheet extends BottomSheetDialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.log_edit_modal, container, false);
         btnUpdate = view.findViewById(R.id.btnUpdate);
+
+        etLogTitle = view.findViewById(R.id.etLogTitle);
+        etLogDescription = view.findViewById(R.id.etLogDescription);
+
+        firestore = FirebaseFirestore.getInstance();
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,11 +54,20 @@ public class EditLogBottomSheet extends BottomSheetDialogFragment {
     }
 
     private void loadLogDetails() {
-        firestore.collection("logs").document(logTimestamp).get()
+        firestore.collection("logs").document(Objects.requireNonNull(getCurrentUserUid())).collection("logs")
+                .document().get()
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
-                        etLogTitle.setText(documentSnapshot.getString("title"));
-                        etLogDescription.setText(documentSnapshot.getString("description"));
+                        Toast.makeText(requireContext(), "Logs found", Toast.LENGTH_SHORT).show();
+                        etLogTitle.setText(documentSnapshot.getString("logTitle"));
+                        etLogDescription.setText(documentSnapshot.getString("logDescription"));
+                    }else {
+                        Toast.makeText(requireContext(), "No logs found", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(requireContext(), "No document found", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -104,7 +118,6 @@ public class EditLogBottomSheet extends BottomSheetDialogFragment {
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-
                         Toast.makeText(requireContext(), "Failed to add logs: "+e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });

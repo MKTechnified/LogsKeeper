@@ -5,19 +5,38 @@ public class LogModel {
     private String logDescription;
     private String logTimestamp;
 
-    private String logHashTags;
+    private String logHashTags, logID;
 
     public LogModel() {}
 
-    public LogModel(String logTitle, String logDescription, String logTimestamp, String logHashTags) {
+    public LogModel(String logTitle, String logDescription, String logHashTags) {
         this.logTitle = logTitle;
         this.logDescription = logDescription;
-        this.logTimestamp = logTimestamp;
+        this.logHashTags = logHashTags;
+        this.logID = this.logTitle + this.logHashTags + this.getLogTimestamp();
+    }
+
+    public String getLogHashTags() {
+        return logHashTags;
+    }
+
+    public void setLogHashTags(String logHashTags) {
         this.logHashTags = logHashTags;
     }
 
+    public String getLogID() {
+        return logID;
+    }
+
+    public void setLogID() {
+        this.logID = this.logTitle + this.logHashTags + this.getLogTimestamp();
+    }
+
     public String getLogTitle() { return logTitle; }
-    public void setLogTitle(String logTitle) { this.logTitle = logTitle; }
+    public void setLogTitle(String logTitle) {
+        this.logTitle = logTitle;
+
+    }
 
     public String getLogDescription() { return logDescription; }
     public void setLogDescription(String logDescription) { this.logDescription = logDescription; }

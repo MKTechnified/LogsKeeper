@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/etLogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_edges"
+        android:padding="12dp"
+        android:hint="Log Title" />
+
+    <EditText
+        android:id="@+id/etLogDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="12dp"
+        android:gravity="start"
+        android:hint="Log Description"
+        android:background="@drawable/round_edges"
+        android:inputType="textMultiLine"
+        android:minLines="3" />
+
+    <Button
+        android:layout_marginTop="10dp"
+        android:id="@+id/btnUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update Log"
+        android:backgroundTint="@color/facebook_blue"
+        android:textColor="@android:color/white" />
+</LinearLayout>

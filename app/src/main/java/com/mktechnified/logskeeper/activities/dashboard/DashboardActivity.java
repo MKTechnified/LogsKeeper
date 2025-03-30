@@ -18,7 +18,7 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        imgBtnAddLog = findViewById(R.id.imgBtnAddLog);
+        imgBtnAddLog = findViewById(R.id.fabAddLog);
         imgBtnAddLog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

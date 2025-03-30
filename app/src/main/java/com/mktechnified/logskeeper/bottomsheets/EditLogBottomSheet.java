@@ -22,7 +22,7 @@ public class EditLogBottomSheet extends BottomSheetDialogFragment {
     private EditText etLogTitle, etLogDescription, etLogType;
     private Button btnUpdate;
     private FirebaseFirestore firestore;
-    private String logId; // Firestore Document ID
+    private String logTimestamp; // Firestore Document ID
 
 
     @Nullable
@@ -35,12 +35,11 @@ public class EditLogBottomSheet extends BottomSheetDialogFragment {
     }
 
     private void loadLogDetails() {
-        firestore.collection("logs").document(logId).get()
+        firestore.collection("logs").document(logTimestamp).get()
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
                         etLogTitle.setText(documentSnapshot.getString("title"));
                         etLogDescription.setText(documentSnapshot.getString("description"));
-                        etLogType.setText(documentSnapshot.getString("type"));
                     }
                 });
     }
@@ -60,7 +59,7 @@ public class EditLogBottomSheet extends BottomSheetDialogFragment {
         updatedData.put("description", newDescription);
         updatedData.put("type", newType);
 
-        firestore.collection("logs").document(logId)
+        firestore.collection("logs").document(logTimestamp)
                 .update(updatedData)
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(getContext(), "Log updated successfully", Toast.LENGTH_SHORT).show();

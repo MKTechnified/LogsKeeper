@@ -5,12 +5,24 @@
     android:padding="20dp"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Log Details"
+        android:textSize="20sp"
+        android:id="@+id/tvLogDetails"
+        android:textColor="@color/text_primary"
+        android:textStyle="bold"
+        android:gravity="center"
+        />
+
     <EditText
         android:id="@+id/etLogTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/round_edges"
-        android:padding="12dp"
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
         android:hint="Log Title" />
 
     <EditText
@@ -18,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:padding="12dp"
+        android:padding="10dp"
         android:gravity="start"
         android:hint="Log Description"
         android:background="@drawable/round_edges"
@@ -33,4 +45,5 @@
         android:text="Update Log"
         android:backgroundTint="@color/facebook_blue"
         android:textColor="@android:color/white" />
+
 </LinearLayout>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1075842271884",
+    "project_id": "logs-keeper-21",
+    "storage_bucket": "logs-keeper-21.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1075842271884:android:63651d6410b6e2b7e289a9",
+        "android_client_info": {
+          "package_name": "com.mktechnified.logskeeper"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPE5fkzOpfPn5vdSuqHvdo2Lq6qD2NkjI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

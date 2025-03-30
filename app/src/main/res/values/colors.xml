@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="facebook_blue">#1877F2</color>
+    <color name="text_primary">@color/black</color>
+    <color name="text_secondary">#FFFFFF</color>
+    <color name="text_hint">#8A8A8A</color>
+    <color name="edge_color">@color/black</color>
+    <color name="background">@color/white</color>
+
+    <color name="primary">#6200EE</color> <!-- Primary App Color -->
+    <color name="red">#D32F2F</color> <!-- Delete Button Color -->
+    <color name="gray">#757575</color> <!-- Timestamp Color -->
+    <color name="dark_gray">#616161</color> <!-- Log Description Color -->
+</resources>

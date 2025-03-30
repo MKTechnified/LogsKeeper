@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/log_anger"
+        android:title="Anger"/>
+    <item
+        android:id="@+id/log_fear"
+        android:title="Fear"/>
+    <item
+        android:id="@+id/log_lesson"
+        android:title="Lesson"/>
+    <item
+        android:id="@+id/log_action"
+        android:title="Action"/>
+    <item
+        android:id="@+id/log_regret"
+        android:title="Regret"/>
+    <item
+        android:id="@+id/log_happiness"
+        android:title="Happiness"/>
+    <item
+        android:id="@+id/log_freedom"
+        android:title="Freedom"/>
+</menu>

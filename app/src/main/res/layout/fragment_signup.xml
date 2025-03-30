@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@color/background"
+        android:padding="20dp">
+
+        <!-- App Name -->
+        <TextView
+            android:id="@+id/appTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"
+            android:layout_gravity="center"
+            android:layout_marginBottom="50dp"/>
+
+        <!-- Name Input -->
+        <EditText
+            android:id="@+id/nameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/hint_full_name"
+            android:background="@drawable/round_edges"
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:textColor="@color/text_primary"
+            android:inputType="textPersonName"
+            android:elevation="2dp"
+            android:layout_marginBottom="10dp"/>
+
+        <!-- Email Input -->
+        <EditText
+            android:id="@+id/emailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/hint_email"
+            android:background="@drawable/round_edges"
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:textColor="@color/text_primary"
+            android:inputType="textEmailAddress"
+            android:elevation="2dp"
+            android:layout_marginBottom="10dp"/>
+
+        <!-- Password Input -->
+        <EditText
+            android:id="@+id/passwordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/hint_password"
+            android:background="@drawable/round_edges"
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:textColor="@color/text_primary"
+            android:inputType="textPassword"
+            android:elevation="2dp"
+            android:layout_marginBottom="10dp"/>
+
+        <!-- Confirm Password Input -->
+        <EditText
+            android:id="@+id/confirmPasswordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/hint_confirm_password"
+            android:background="@drawable/round_edges"
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:textColor="@color/text_primary"
+            android:inputType="textPassword"
+            android:elevation="2dp"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- Signup Button -->
+        <Button
+            android:id="@+id/signupButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/signup"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:backgroundTint="@color/facebook_blue"/>
+
+        <!-- Already have an account? Login -->
+        <TextView
+            android:id="@+id/loginText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/already_have_account"
+            android:textColor="@color/text_primary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:clickable="true"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+</ScrollView>

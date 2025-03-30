@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Name -->
+    <string name="app_name">LogsKeeper</string>
+
+    <!-- Dashboard Strings -->
+    <string name="dashboard_title">Dashboard</string>
+    <string name="add_log">Add Log</string>
+
+    <!-- Add/Edit Log Screen -->
+    <string name="log_title">Log Title</string>
+    <string name="log_description">Log Description</string>
+    <string name="select_log_type">Select Log Type</string>
+    <string name="save_log">Save Log</string>
+
+    <!-- Log Types -->
+    <string name="anger">Anger</string>
+    <string name="fear">Fear</string>
+    <string name="lesson">Lesson</string>
+    <string name="action">Action</string>
+    <string name="regret">Regret</string>
+    <string name="happiness">Happiness</string>
+    <string name="freedom">Freedom</string>
+
+    <!-- Log Item Buttons -->
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+
+    <!-- Messages -->
+    <string name="fill_all_fields">Please fill in all fields</string>
+    <string name="log_saved">Log saved successfully</string>
+    <string name="log_save_error">Error saving log</string>
+    <string name="log_deleted">Log deleted successfully</string>
+    <string name="log_delete_error">Error deleting log</string>
+    <string name="loading_logs">Loading logs...</string>
+    <string name="failed_to_load_logs">Failed to load logs</string>
+    <string name="hint_password">Password</string>
+    <string name="login">Login</string>
+    <string name="create_account">Create account</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_full_name">Full Name</string>
+    <string name="signup">Signup</string>
+    <string name="already_have_account">Already have account</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+</resources>

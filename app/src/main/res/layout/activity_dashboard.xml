@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/dashboard_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp">
+    android:padding="15dp">
 
-    <EditText
-        android:layout_marginTop="10dp"
-        android:id="@+id/searchLogET"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/searchLogBtn"
-        android:hint="Search" />
-
-
-    <ImageButton
-        android:layout_marginTop="10dp"
-        android:id="@+id/searchLogBtn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:layout_toStartOf="@+id/addLogBtn"
-        android:src="@drawable/ic_add" />
-
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etSearchLog"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Search Log"
+            android:layout_toStartOf="@+id/imgBtnSearchLog"
+            android:inputType="text"
+            android:textColor="@color/text_primary" />
 
     <ImageButton
         android:layout_marginTop="10dp"
-        android:id="@+id/addLogBtn"
+        android:id="@+id/imgBtnSearchLog"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_add" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_marginTop="10dp"
+        android:id="@+id/imgBtnAddLog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:src="@drawable/ic_add" />
 
 
@@ -43,6 +43,6 @@
         android:id="@+id/logRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/addLogBtn" />
+        android:layout_below="@+id/imgBtnAddLog" />
 
 </RelativeLayout>

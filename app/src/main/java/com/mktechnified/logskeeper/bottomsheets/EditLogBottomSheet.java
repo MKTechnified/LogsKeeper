@@ -24,23 +24,12 @@ public class EditLogBottomSheet extends BottomSheetDialogFragment {
     private FirebaseFirestore firestore;
     private String logId; // Firestore Document ID
 
-    public EditLogBottomSheet(String logId) {
-        this.logId = logId;
-    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.log_edit_modal, container, false);
 
-        etLogTitle = view.findViewById(R.id.etLogTitle);
-        etLogDescription = view.findViewById(R.id.etLogDescription);
-        btnUpdate = view.findViewById(R.id.btnUpdate);
-        firestore = FirebaseFirestore.getInstance();
-
-        loadLogDetails(); // Load existing log data
-
-        btnUpdate.setOnClickListener(v -> updateLog());
 
         return view;
     }

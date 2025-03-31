@@ -11,17 +11,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.mktechnified.logskeeper.R;
 import com.mktechnified.logskeeper.models.LogModel;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Objects;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,8 +29,6 @@ public class EditLogBottomSheet extends BottomSheetDialogFragment {
     private EditText etLogTitle, etLogDescription;
     private Button btnUpdate;
     private FirebaseFirestore firestore;
-    private String logTimestamp; // Firestore Document ID
-
 
     @Nullable
     @Override
@@ -43,61 +41,30 @@ public class EditLogBottomSheet extends BottomSheetDialogFragment {
 
         firestore = FirebaseFirestore.getInstance();
 
-        btnUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                updateLog();
-            }
-        });
+        btnUpdate.setOnClickListener(view1 -> updateLog());
 
         return view;
     }
 
-    private void loadLogDetails() {
-        firestore.collection("logs").document(Objects.requireNonNull(getCurrentUserUid())).collection("logs")
-                .document().get()
-                .addOnSuccessListener(documentSnapshot -> {
-                    if (documentSnapshot.exists()) {
-                        Toast.makeText(requireContext(), "Logs found", Toast.LENGTH_SHORT).show();
-                        etLogTitle.setText(documentSnapshot.getString("logTitle"));
-                        etLogDescription.setText(documentSnapshot.getString("logDescription"));
-                    }else {
-                        Toast.makeText(requireContext(), "No logs found", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(requireContext(), "No document found", Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
     private String extractHashtags() {
         String inputText = etLogDescription.getText().toString();
-        String tags = "";
+        StringBuilder tags = new StringBuilder();
 
-        // Extract hashtags using regular expression
         Pattern pattern = Pattern.compile("#\\w+");
         Matcher matcher = pattern.matcher(inputText);
 
-        // ArrayList to store the extracted hashtags
         ArrayList<String> hashtags = new ArrayList<>();
-
-        // Loop through the matcher results and add hashtags to the ArrayList
         while (matcher.find()) {
             hashtags.add(matcher.group());
         }
 
-        // Convert ArrayList to a string array
-        String[] hashtagArray = hashtags.toArray(new String[0]);
-
-        // Print or use the extracted hashtags as needed
-        for (String hashtag : hashtagArray) {
-            Toast.makeText(requireContext(), "" + hashtag, Toast.LENGTH_SHORT).show();
-            tags = hashtag;
+        for (String hashtag : hashtags) {
+            tags.append(hashtag).append(" ");
         }
 
-        return tags;
+        return tags.toString().trim();
     }
+
     private void updateLog() {
         String logTitle = etLogTitle.getText().toString().trim();
         String logDescription = etLogDescription.getText().toString().trim();
@@ -107,29 +74,33 @@ public class EditLogBottomSheet extends BottomSheetDialogFragment {
             return;
         }
 
-        LogModel logModel = new LogModel(logTitle, logDescription, extractHashtags());
+        String logHashTags = extractHashtags();
+        String userUid = getCurrentUserUid();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        firestore.collection("users").document(Objects.requireNonNull(getCurrentUserUid()))
-                .collection("logs").document(logModel.getLogID()).set(logModel).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(requireContext(), "Log Added", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(requireContext(), "Failed to add logs: "+e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+        // Generate Firestore Timestamp
+        Timestamp currentTimestamp = Timestamp.now();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        String formattedTimestamp = sdf.format(currentTimestamp.toDate());
 
+        // 🔥 Generate custom logID
+        String logID = logTitle + " " + logHashTags + " " + formattedTimestamp;
+
+        // Create log model with timestamp
+        LogModel logModel = new LogModel(logTitle, logDescription, logHashTags);
+        logModel.setLogID(logTitle+logHashTags+formattedTimestamp);
+
+        // 🔥 Manually use logID as Firestore document ID
+        db.collection("users").document(userUid).collection("logs").document(logID)
+                .set(logModel)
+                .addOnSuccessListener(aVoid -> Toast.makeText(getContext(), "Log Added!", Toast.LENGTH_SHORT).show())
+                .addOnFailureListener(e -> Toast.makeText(getContext(), "Failed to add log: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
+
+
 
     public String getCurrentUserUid() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            return user.getUid(); // Get the UID of the logged-in user
-        } else {
-            return null; // No user is logged in
-        }
+        return (user != null) ? user.getUid() : null;
     }
 }

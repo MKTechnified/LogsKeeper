@@ -88,7 +88,7 @@ public class EditLogBottomSheet extends BottomSheetDialogFragment {
 
         // Create log model with timestamp
         LogModel logModel = new LogModel(logTitle, logDescription, logHashTags);
-        logModel.setLogID(logTitle+logHashTags+formattedTimestamp);
+        logModel.setLogID(logTitle+" "+logHashTags+" "+formattedTimestamp);
 
         // 🔥 Manually use logID as Firestore document ID
         db.collection("users").document(userUid).collection("logs").document(logID)

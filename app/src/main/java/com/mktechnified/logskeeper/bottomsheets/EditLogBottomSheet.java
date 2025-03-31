@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -92,9 +94,21 @@ public class EditLogBottomSheet extends BottomSheetDialogFragment {
 
         // 🔥 Manually use logID as Firestore document ID
         db.collection("users").document(userUid).collection("logs").document(logID)
-                .set(logModel)
-                .addOnSuccessListener(aVoid -> Toast.makeText(getContext(), "Log Added!", Toast.LENGTH_SHORT).show())
-                .addOnFailureListener(e -> Toast.makeText(getContext(), "Failed to add log: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                .set(logModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(getContext(), "Log updated successfully!", Toast.LENGTH_SHORT).show();
+                        dismiss();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getContext(), "Log update failed: "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        dismiss();
+                    }
+                });
+
+    //dismiss();
     }
 
 

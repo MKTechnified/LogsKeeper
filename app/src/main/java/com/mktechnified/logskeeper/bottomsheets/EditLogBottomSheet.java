@@ -82,7 +82,7 @@ public class EditLogBottomSheet extends BottomSheetDialogFragment {
 
         // Generate Firestore Timestamp
         Timestamp currentTimestamp = Timestamp.now();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault());
         String formattedTimestamp = sdf.format(currentTimestamp.toDate());
 
         // 🔥 Generate custom logID
@@ -90,7 +90,7 @@ public class EditLogBottomSheet extends BottomSheetDialogFragment {
 
         // Create log model with timestamp
         LogModel logModel = new LogModel(logTitle, logDescription, logHashTags);
-        logModel.setLogID(logTitle+" "+logHashTags+" "+formattedTimestamp);
+        logModel.setLogID(logID.toString());
 
         // 🔥 Manually use logID as Firestore document ID
         db.collection("users").document(userUid).collection("logs").document(logID)

@@ -1,5 +1,6 @@
 package com.mktechnified.logskeeper.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,27 +14,28 @@ import com.mktechnified.logskeeper.models.LogModel;
 
 import java.util.List;
 
-public class LogAdapter extends RecyclerView.Adapter<LogAdapter.ViewHolder> {
-
+public class LogAdapter extends RecyclerView.Adapter<LogAdapter.LogViewHolder> {
     private List<LogModel> logList;
+    private Context context;
 
-    public LogAdapter(List<LogModel> logList) {
+    public LogAdapter(List<LogModel> logList, Context context) {
         this.logList = logList;
+        this.context = context;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_log, parent, false);
-        return new ViewHolder(view);
+    public LogViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_log, parent, false);
+        return new LogViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull LogViewHolder holder, int position) {
         LogModel log = logList.get(position);
-        holder.logTitle.setText(log.getLogTitle());
-        holder.logDescription.setText(log.getLogDescription());
+        holder.tvTitle.setText(log.getLogTitle());
+        holder.tvDescription.setText(log.getLogDescription());
+
     }
 
     @Override
@@ -41,13 +43,13 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.ViewHolder> {
         return logList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView logTitle, logDescription, logTimestamp, logHashTags;
+    public static class LogViewHolder extends RecyclerView.ViewHolder {
+        TextView tvTitle, tvDescription;
 
-        public ViewHolder(@NonNull View itemView) {
+        public LogViewHolder(@NonNull View itemView) {
             super(itemView);
-            logTitle = itemView.findViewById(R.id.tvLogTitle);
-            logDescription = itemView.findViewById(R.id.tvLogDescription);
+            tvTitle = itemView.findViewById(R.id.tvLogTitle);
+            tvDescription = itemView.findViewById(R.id.tvLogDescription);
         }
     }
 }

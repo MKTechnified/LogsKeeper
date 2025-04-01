@@ -44,6 +44,6 @@
         android:id="@+id/logRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/fabAddLog" />
+        android:layout_below="@+id/imgBtnSearchLog" />
 
 </RelativeLayout>

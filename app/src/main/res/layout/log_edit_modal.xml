@@ -21,7 +21,6 @@
         android:id="@+id/etLogTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/round_edges"
         android:padding="10dp"
         android:layout_marginTop="20dp"
         android:hint="Log Title" />
@@ -34,7 +33,6 @@
         android:padding="10dp"
         android:gravity="start"
         android:hint="Log Description"
-        android:background="@drawable/round_edges"
         android:inputType="textMultiLine"
         android:minLines="3" />
 

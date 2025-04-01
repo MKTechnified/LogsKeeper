@@ -4,7 +4,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,6 +37,13 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.LogViewHolder> {
         LogModel log = logList.get(position);
         holder.tvTitle.setText(log.getLogTitle());
         holder.tvDescription.setText(log.getLogDescription());
+        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO Delete log from Firestore
+                Toast.makeText(context, "Deleted!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
@@ -45,11 +54,13 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.LogViewHolder> {
 
     public static class LogViewHolder extends RecyclerView.ViewHolder {
         TextView tvTitle, tvDescription;
+        Button btnDelete;
 
         public LogViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tvLogTitle);
             tvDescription = itemView.findViewById(R.id.tvLogDescription);
+            btnDelete = itemView.findViewById(R.id.btnDelete);
         }
     }
 }
